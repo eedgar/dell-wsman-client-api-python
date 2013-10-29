@@ -41,7 +41,7 @@ class WSManProviderFactory(object):
         """
         
         # Set the transport
-        self._transport = transport    
+        self.__transport = transport    
 
     def get_provider(self):
         """
@@ -50,12 +50,11 @@ class WSManProviderFactory(object):
         @return: WSManProvider that matches the specified criterion.
         @rtype: L{WSManProvider}
         """
-        import pdb;pdb.set_trace()
-        if self._transport.id == 'twisted':
-            return Twisted(self._transport)
+        if self.__transport.id == 'twisted':
+            return Twisted(self.__transport)
 
         if sys.platform == 'win32':
-            return WinRM(self._transport)
+            return WinRM(self.__transport)
         
         return WSManCLI(self.__transport) 
 
