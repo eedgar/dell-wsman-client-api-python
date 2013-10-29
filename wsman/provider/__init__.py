@@ -24,6 +24,7 @@ WS-Management provider
 import sys
 from winrm import WinRM
 from wsmancli import WSManCLI
+from twisted import Twisted
 
 # Factory for the WSMan Provider
 class WSManProviderFactory(object):
@@ -40,9 +41,8 @@ class WSManProviderFactory(object):
         """
         
         # Set the transport
-        self.__transport = transport    
-    
-    
+        self._transport = transport    
+
     def get_provider(self):
         """
         Get the provider based on the specified criterion.
@@ -50,9 +50,12 @@ class WSManProviderFactory(object):
         @return: WSManProvider that matches the specified criterion.
         @rtype: L{WSManProvider}
         """
-        
+        import pdb;pdb.set_trace()
+        if self._transport.id == 'twisted':
+            return Twisted(self._transport)
+
         if sys.platform == 'win32':
-            return WinRM(self.__transport)
+            return WinRM(self._transport)
         
         return WSManCLI(self.__transport) 
 

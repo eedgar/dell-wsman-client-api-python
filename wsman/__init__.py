@@ -38,11 +38,10 @@ class WSMan(object):
         """
         
         # Store the transport
-        self.__transport = transport
-        
+        self._transport = transport
+
         # Provider
-        self.__provider = WSManProviderFactory(self.__transport).get_provider()
-    
+        self.__provider = WSManProviderFactory(self._transport).get_provider()
     
     def identify(self, remote=None, raw=False):
         """

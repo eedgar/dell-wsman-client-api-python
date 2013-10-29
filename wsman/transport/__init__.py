@@ -33,7 +33,8 @@ class Transport(object):
         """
         Constructor for the transport
         """
-        
+        self.id = 'transport'
+
         # controls if the transport should write anything to the console
         self.__quiet = False
         pass
